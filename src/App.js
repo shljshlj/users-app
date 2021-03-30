@@ -12,7 +12,16 @@ import {
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Logo } from './Logo';
 
+const getUsers = async () => {
+  const res = await fetch('http://localhost:3004/users');
+  console.log(await res.json());
+}
+
+
 function App() {
+
+  getUsers();
+
   return (
     <ChakraProvider theme={theme}>
       <Box textAlign="center" fontSize="xl">
