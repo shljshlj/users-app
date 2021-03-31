@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { ChakraProvider, theme, } from '@chakra-ui/react';
 
@@ -15,9 +15,11 @@ const getUsers = async () => {
 }
 
 function App() {
-  getUsers();
-  const currentUser = null;
+  const [token, setToken] = useState();
 
+  if (!token) {
+    return <LoginPage setToken={setToken} />
+  }
 
   return (
     <ChakraProvider theme={theme}>
@@ -25,9 +27,7 @@ function App() {
         <Header />
         <Switch>
           <Route exact path='/' render={() =>
-            currentUser ?
-              <Redirect to='/users' /> :
-              <Redirect to='/login' />}
+            <Redirect to='/users' />}
           />
           <Route exact path='/users' component={UsersPage} />
           <Route exact path='/users/create' component={UserCreatePage} />
