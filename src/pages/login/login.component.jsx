@@ -1,18 +1,21 @@
-import { useState } from 'react';
+import useCustomForm from '../../hooks/useCustomForm';
+
+const initialValues = {
+  email: ''
+};
 
 const LoginPage = ({ setToken }) => {
-  const [email, setEmail] = useState('');
-
-  const handleInputChange = (e) => {
-    e.persist();
-    setEmail(e.target.value)
-    console.log(email)
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(email);
-  }
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    handleSubmit
+  } = useCustomForm({
+    initialValues,
+    onSubmit: (values) => console.log(values)
+  });
 
   return (
     <form onSubmit={handleSubmit}>
@@ -21,8 +24,8 @@ const LoginPage = ({ setToken }) => {
         <input
           name="email"
           type="email"
-          value={email}
-          onChange={handleInputChange}
+          value={values.email}
+          onChange={handleChange}
           required
         />
       </label>
