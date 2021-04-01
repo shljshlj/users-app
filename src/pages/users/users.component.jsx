@@ -5,16 +5,17 @@ import {
   Text,
   VStack,
   Grid,
+  Heading
 } from '@chakra-ui/react';
 
 const UsersPage = () => {
   return (
-    <Box textAlign="center" fontSize="xl">
+    <Box fontSize="l">
       <Grid minH="100vh" p={3}>
         <VStack spacing={8}>
-          <Text>
+          <Heading as="h1" size="xl">
             Users Page
-          </Text>
+          </Heading>
           <UserList />
         </VStack>
       </Grid>

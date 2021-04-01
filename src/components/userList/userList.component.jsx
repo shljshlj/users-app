@@ -1,7 +1,20 @@
 import { useState, useEffect } from 'react';
-import { userService } from '../../services/userService';
 import { Link as RouterLink } from 'react-router-dom';
-import { Link } from '@chakra-ui/react';
+
+import { userService } from '../../services/userService';
+
+import {
+  Box,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Link,
+  Image,
+  Text
+} from "@chakra-ui/react"
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -26,38 +39,55 @@ const UserList = () => {
   }
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Id</th>
-          <th>Picture</th>
-          <th>Full Name</th>
-          <th>State</th>
-          <th>Email Address</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          users.length !== 0 ?
-            users.map(user => {
-              return (
-                <tr key={user.id}>
-                  <td>{user.id}</td>
-                  <td>{user.avatar}</td>
-                  <td>{user.fullName}</td>
-                  <td>{user.state}</td>
-                  <td>{user.email}</td>
-                </tr>
+    <Box>
+      <Table variant="simple" size="md">
+        <Thead>
+          <Tr>
+            <Th isNumeric>Id</Th>
+            <Th>Picture</Th>
+            <Th>Full Name</Th>
+            <Th>State</Th>
+            <Th>Email Address</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {
+            users.length !== 0 ?
+              users.map(user => {
+                return (
+                  <Tr key={user.id}>
+                    <Td isNumeric>{user.id}</Td>
+                    <Td>
+                      <Link as={RouterLink} to={`/users/${user.id}`}>
+                        <Image
+                          boxSize="100px"
+                          objectFit="cover"
+                          src={user.avatar}
+                          alt={`Profile picture of ${user.fullName}`}
+                        />
+                      </Link>
+                    </Td>
+                    <Td>
+                      <Link as={RouterLink} to={`/users/${user.id}`}>
+                        {user.fullName}
+                      </Link>
+                    </Td>
+                    <Td>{user.state}</Td>
+                    <Td>{user.email}</Td>
+                  </Tr>
+                )
+              }) :
+              (
+                <Tr>
+                  <Td colspan="5">
+                    <Text fontSize="sm" color="gray.600" align="center">No user data</Text>
+                  </Td>
+                </Tr>
               )
-            }) :
-            (
-              <tr>
-                <td>No user data</td>
-              </tr>
-            )
-        }
-      </tbody>
-    </table>
+          }
+        </Tbody>
+      </Table>
+    </Box>
   );
 }
 
