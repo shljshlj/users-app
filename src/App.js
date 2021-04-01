@@ -12,10 +12,6 @@ import LoginPage from './pages/login/login.component';
 import BaseLayout from './components/layouts/base-layout.component';
 import PageContainer from './components/layouts/page-container.component';
 
-const getUsers = async () => {
-  const res = await fetch('http://localhost:9000/users');
-  console.log(await res.json());
-}
 
 function App() {
   // const [token, setToken] = useState();

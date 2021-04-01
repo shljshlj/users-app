@@ -59,12 +59,15 @@ const UserList = () => {
                     <Td isNumeric>{user.id}</Td>
                     <Td>
                       <Link as={RouterLink} to={`/users/${user.id}`}>
-                        <Image
-                          boxSize="100px"
-                          objectFit="cover"
-                          src={user.avatar}
-                          alt={`Profile picture of ${user.fullName}`}
-                        />
+                        <Box maxW="100px" borderWidth="1px" borderRadius="lg" overflow="hidden">
+                          <Image
+                            boxSize="100%"
+                            objectFit="cover"
+                            src={user.avatar || "https://via.placeholder.com/100"}
+                            fallbackSrc="https://via.placeholder.com/100"
+                            alt={`Profile picture of ${user.fullName}`}
+                          />
+                        </Box>
                       </Link>
                     </Td>
                     <Td>
@@ -73,7 +76,7 @@ const UserList = () => {
                       </Link>
                     </Td>
                     <Td>{user.state}</Td>
-                    <Td>{user.email}</Td>
+                    <Td color="gray.500">{user.email}</Td>
                   </Tr>
                 )
               }) :
