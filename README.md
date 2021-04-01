@@ -30,7 +30,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Resources
 
-- #### Forms
+#### Forms
  - [Custom Hook Form](https://www.telerik.com/blogs/how-to-build-custom-forms-react-hooks)<br />
     Build a custom hook for handling forms
     

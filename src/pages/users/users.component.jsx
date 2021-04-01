@@ -1,7 +1,8 @@
+import UserList from '../../components/userList/userList.component';
+
 import {
   Box,
   Text,
-  Link,
   VStack,
   Grid,
 } from '@chakra-ui/react';
@@ -13,16 +14,8 @@ const UsersPage = () => {
         <VStack spacing={8}>
           <Text>
             Users Page
-        </Text>
-          <Link
-            color="teal.500"
-            href="https://chakra-ui.com"
-            fontSize="2xl"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn Chakra
-        </Link>
+          </Text>
+          <UserList />
         </VStack>
       </Grid>
     </Box>

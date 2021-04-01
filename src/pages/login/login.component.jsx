@@ -28,6 +28,7 @@ const LoginPage = ({ setToken }) => {
           onChange={handleChange}
           required
         />
+        {!values.email && <span>Please enter an email address</span>}
       </label>
       <div>
         <button type="submit">Sign In</button>

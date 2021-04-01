@@ -10,16 +10,16 @@ import UserCreatePage from './pages/user-create/user-create.component';
 import LoginPage from './pages/login/login.component';
 
 const getUsers = async () => {
-  const res = await fetch('http://localhost:3004/users');
+  const res = await fetch('http://localhost:9000/users');
   console.log(await res.json());
 }
 
 function App() {
-  const [token, setToken] = useState();
+  // const [token, setToken] = useState();
 
-  if (!token) {
-    return <LoginPage setToken={setToken} />
-  }
+  // if (!token) {
+  //   return <LoginPage setToken={setToken} />
+  // }
 
   return (
     <ChakraProvider theme={theme}>
