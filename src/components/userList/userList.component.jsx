@@ -32,9 +32,8 @@ const UserList = () => {
           <th>Id</th>
           <th>Picture</th>
           <th>Full Name</th>
-          <th>Country</th>
+          <th>State</th>
           <th>Email Address</th>
-          <th>Options</th>
         </tr>
       </thead>
       <tbody>
@@ -46,18 +45,14 @@ const UserList = () => {
                   <td>{user.id}</td>
                   <td>{user.avatar}</td>
                   <td>{user.fullName}</td>
-                  <td>{user.country}</td>
+                  <td>{user.state}</td>
                   <td>{user.email}</td>
-                  <td>
-                    <Link as={RouterLink} to={`/users/${user.id}/edit`}>Edit</Link>
-                    <Link as={RouterLink} to={`/`}>Delete</Link>
-                  </td>
                 </tr>
               )
             }) :
             (
               <tr>
-                <td> No user data</td>
+                <td>No user data</td>
               </tr>
             )
         }
