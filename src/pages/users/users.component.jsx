@@ -1,4 +1,4 @@
-import UserList from '../../components/userList/userList.component';
+import UserList from '../../components/user-list/user-list.component';
 
 import {
   Box,
