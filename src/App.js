@@ -12,13 +12,25 @@ import LoginPage from './pages/login/login.component';
 import BaseLayout from './components/layouts/base-layout.component';
 import PageContainer from './components/layouts/page-container.component';
 
+import useAuth from './hooks/useAuth';
 
 function App() {
-  // const [token, setToken] = useState();
+  const {
+    authToken,
+    setAuthToken,
+    hasLogged,
+    setHasLogged
+  } = useAuth();
 
-  // if (!token) {
-  //   return <LoginPage setToken={setToken} />
-  // }
+  console.log(hasLogged)
+
+  if (!hasLogged || !authToken) {
+    return (
+      <ChakraProvider theme={theme}>
+        <LoginPage authToken={authToken} setAuthToken={setAuthToken} setHasLogged={setHasLogged} />
+      </ChakraProvider>
+    );
+  }
 
   return (
     <ChakraProvider theme={theme}>
@@ -34,7 +46,6 @@ function App() {
               <Route exact path='/users/create' component={UserCreatePage} />
               <Route exact path='/users/:id' component={UserDetailsPage} />
               <Route exact path='/users/:id/edit' component={UserEditPage} />
-              <Route exact path='/login' component={LoginPage} />
             </PageContainer>
           </Switch>
           <Footer />

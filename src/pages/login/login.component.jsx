@@ -26,7 +26,33 @@ const initialValues = {
   email: ''
 };
 
-const LoginPage = ({ setToken }) => {
+
+const LoginPage = ({
+  authToken,
+  setAuthToken,
+  setHasLogged
+}) => {
+  const loginUser = (loginData) => {
+    try {
+      if (authToken) {
+        if (loginData.values.email !== authToken) {
+          console.log(loginData)
+          throw new Error("Email is not matching");
+        }
+        else {
+          setHasLogged();
+        }
+      } else {
+        setAuthToken(loginData.values.email);
+        setHasLogged();
+      }
+    }
+    catch (err) {
+      console.log(err);
+      console.log(errors);
+    }
+  }
+
   const {
     values,
     errors,
@@ -36,8 +62,10 @@ const LoginPage = ({ setToken }) => {
     handleSubmit
   } = useCustomForm({
     initialValues,
-    onSubmit: (values) => console.log(values)
+    onSubmit: loginUser
   });
+
+
 
   return (
     <Flex
@@ -57,7 +85,7 @@ const LoginPage = ({ setToken }) => {
         borderWidth="1px"
         bg="white"
         p={8}
-        mt="-50%"
+        mt="-20%"
       >
         <Box
           textAlign="center"
@@ -110,7 +138,9 @@ const LoginPage = ({ setToken }) => {
                 >
                   Email used to login:
                 </PopoverHeader>
-                <PopoverBody p={4}>someemail@mail.com</PopoverBody>
+                <PopoverBody p={4}>
+                  {authToken}
+                </PopoverBody>
               </PopoverContent>
             </Popover>
           </Stack>

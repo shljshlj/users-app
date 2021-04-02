@@ -82,7 +82,7 @@ const UserList = () => {
               }) :
               (
                 <Tr>
-                  <Td colspan="5">
+                  <Td colSpan="5">
                     <Text fontSize="sm" color="gray.600" align="center">No user data</Text>
                   </Td>
                 </Tr>
