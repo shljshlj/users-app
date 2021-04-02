@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { ChakraProvider, theme, } from '@chakra-ui/react';
 

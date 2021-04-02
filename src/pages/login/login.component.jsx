@@ -139,7 +139,7 @@ const LoginPage = ({
                   Email used to login:
                 </PopoverHeader>
                 <PopoverBody p={4}>
-                  {authToken}
+                  {authToken ? authToken : 'You haven\'t sign in before'}
                 </PopoverBody>
               </PopoverContent>
             </Popover>
