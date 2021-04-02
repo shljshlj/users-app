@@ -2,7 +2,7 @@
   "name": "users-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/shljshlj/users-app",
+  "homepage": "https://shljshlj.github.io/users-app",
   "dependencies": {
     "@chakra-ui/react": "^1.0.0",
     "@emotion/react": "^11.0.0",
