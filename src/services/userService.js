@@ -1,4 +1,4 @@
-const endpoint = 'http://localhost:9000/users'
+const endpoint = 'https://my-json-server.typicode.com/shljshlj/demo/users'
 
 class UserService {
   async getUsers() {
