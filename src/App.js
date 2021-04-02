@@ -33,7 +33,7 @@ function App() {
 
   return (
     <ChakraProvider theme={theme}>
-      <BrowserRouter>
+      <BrowserRouter basename="/users-app">
         <PageLayout>
           <Header />
           <PageContainer>
