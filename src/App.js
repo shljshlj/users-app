@@ -21,7 +21,7 @@ function App() {
     setHasLogged
   } = useAuth();
 
-  console.log(hasLogged)
+  console.log(process.env.PUBLIC_URL)
 
   if (!hasLogged || !authToken) {
     return (

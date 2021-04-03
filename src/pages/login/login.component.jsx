@@ -20,6 +20,7 @@ import {
   PopoverBody,
   PopoverArrow,
   PopoverCloseButton,
+  useColorMode
 } from '@chakra-ui/react';
 
 const initialValues = {
@@ -32,6 +33,7 @@ const LoginPage = ({
   setAuthToken,
   setHasLogged
 }) => {
+  const { colorMode } = useColorMode();
   const loginUser = (loginData) => {
     try {
       if (authToken) {
@@ -74,7 +76,7 @@ const LoginPage = ({
       justifyContent="center"
       height="100vh"
       px={8}
-      bg="#fffaf6"
+      bg={colorMode === 'light' ? '#fffaf6' : 'gray.500'}
     >
       <Flex
         direction="column"
@@ -83,7 +85,7 @@ const LoginPage = ({
         maxWidth="500px"
         borderRadius="lg"
         borderWidth="1px"
-        bg="white"
+        bg={colorMode === 'light' ? 'white' : 'gray.700'}
         p={8}
         mt="-20%"
       >
