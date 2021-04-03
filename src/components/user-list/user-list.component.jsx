@@ -50,7 +50,7 @@ const UserList = () => {
             <Th isNumeric>Id</Th>
             <Th>Picture</Th>
             <Th>Full Name</Th>
-            <Th>State</Th>
+            <Th>City</Th>
             <Th>Email Address</Th>
           </Tr>
         </Thead>
@@ -79,7 +79,7 @@ const UserList = () => {
                         {user.fullName}
                       </Link>
                     </Td>
-                    <Td>{user.state}</Td>
+                    <Td>{user.city}</Td>
                     <Td color={colorMode === "light" ? "teal.600" : "teal.400"}>{user.email}</Td>
                   </Tr>
                 )
