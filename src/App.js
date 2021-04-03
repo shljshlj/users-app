@@ -8,7 +8,7 @@ import UserDetailsPage from './pages/user-details/user-details.component';
 import UserEditPage from './pages/user-edit/user-edit.component';
 import UserCreatePage from './pages/user-create/user-create.component';
 import LoginPage from './pages/login/login.component';
-import BaseLayout from './components/layouts/base-layout.component';
+import PageLayout from './components/layouts/page-layout.component';
 import PageContainer from './components/layouts/page-container.component';
 
 import useAuth from './hooks/useAuth';
@@ -34,10 +34,10 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
-        <BaseLayout>
+        <PageLayout>
           <Header />
-          <Switch>
-            <PageContainer>
+          <PageContainer>
+            <Switch>
               <Route exact path='/' render={() =>
                 <Redirect to='/users' />}
               />
@@ -45,10 +45,10 @@ function App() {
               <Route exact path='/users/create' component={UserCreatePage} />
               <Route exact path='/users/:id' component={UserDetailsPage} />
               <Route exact path='/users/:id/edit' component={UserEditPage} />
-            </PageContainer>
-          </Switch>
+            </Switch>
+          </PageContainer>
           <Footer />
-        </BaseLayout>
+        </PageLayout>
       </BrowserRouter>
     </ChakraProvider>
   );

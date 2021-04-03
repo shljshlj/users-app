@@ -1,21 +1,19 @@
-import UserList from '../../components/user-list/user-list.component';
+import PageContent from '../../components/layouts/page-content.component';
+import ContentSection from '../../components/layouts/content-section.component';
+import PageHeading from '../../components/page-heading/page-heading.component';
 
-import {
-  Box,
-  VStack,
-  Heading
-} from '@chakra-ui/react';
+import UserList from '../../components/user-list/user-list.component';
 
 const UsersPage = () => {
   return (
-    <Box fontSize="md">
-      <VStack spacing={8}>
-        <Heading as="h1" size="xl">
-          Users Page
-        </Heading>
+    <PageContent>
+      <PageHeading>
+        List of Users
+        </PageHeading>
+      <ContentSection>
         <UserList />
-      </VStack>
-    </Box>
+      </ContentSection>
+    </PageContent>
   );
 }
 

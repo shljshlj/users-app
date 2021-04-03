@@ -1,6 +1,6 @@
 import { Flex } from '@chakra-ui/react';
 
-const BaseLayout = (props) => {
+const PageLayout = (props) => {
   return (
     <Flex
       direction="column"
@@ -12,4 +12,4 @@ const BaseLayout = (props) => {
   )
 };
 
-export default BaseLayout;
+export default PageLayout;

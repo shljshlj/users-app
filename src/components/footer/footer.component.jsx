@@ -4,13 +4,14 @@ const Footer = () => {
   return (
     <Box
       as="footer"
-      bg="gray.700"
+      bg="gray.800"
       color="white"
+      mt="3rem"
     >
       <Flex
         w="100%"
         maxW="1200px"
-        p="1.5rem 1rem"
+        p="2rem 1rem"
         mx="auto"
         h="100%"
       >

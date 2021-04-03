@@ -10,22 +10,19 @@ const Header = () => {
     <Box
       as="header"
       bg={colorMode === "light" ? "white" : "gray.900"}
-      color={colorMode === "light" ? "black" : "white"}
       boxShadow="rgba(0, 0, 0, 0.1) 0px 1px 2px 0px"
+      zIndex="2"
     >
       <Flex
         justify="space-between"
         align="center"
-        w="100%"
-        maxW="1200px"
-        h="100%"
-        mx="auto"
-        p="1.5em 1em"
+        p="1em"
       >
         <Logo />
         <Flex
           align="center"
-          justifySelf="flex-end">
+          justifySelf="flex-end"
+        >
           <SiteNav />
           <ColorModeSwitcher p={3} />
         </Flex>

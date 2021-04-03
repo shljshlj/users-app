@@ -75,19 +75,21 @@ const LoginPage = ({
       alignItems="center"
       justifyContent="center"
       height="100vh"
-      px={8}
-      bg={colorMode === 'light' ? '#fffaf6' : 'gray.500'}
+      px={{ sm: 8 }}
+      bg={colorMode === "light" ? "#fffaf6" : "gray.500"}
     >
       <Flex
         direction="column"
         alignItems="stretch"
-        w="100%"
+        justifyContent={{ base: "center", sm: "flex-start" }}
+        height={{ base: "100%", sm: "unset" }}
+        width="100%"
         maxWidth="500px"
-        borderRadius="lg"
-        borderWidth="1px"
-        bg={colorMode === 'light' ? 'white' : 'gray.700'}
+        borderRadius={{ sm: "lg" }}
+        borderWidth={{ sm: "1px" }}
+        bg={colorMode === "light" ? "white" : "gray.700"}
         p={8}
-        mt="-20%"
+        mt={{ sm: "-20%" }}
       >
         <Box
           textAlign="center"
