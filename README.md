@@ -3,7 +3,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and [Chakra UI](https://chakra-ui.com/).
 
 ## Demo
-With static data from Github: [__https://shljshlj.github.io/users-app/users__](https://shljshlj.github.io/users-app/users)
+Demo that uses static data from external URL: [LINK](https://shljshlj.github.io/users-app/users)
 
 <br />
 
