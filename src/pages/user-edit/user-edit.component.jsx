@@ -184,8 +184,8 @@ const UserEditPage = () => {
   useEffect(() => {
     const getUser = async () => {
       setLoading(true);
-      const user = await userService.getUserDetails(id);
-      setUser(user);
+      const response = await userService.getUserDetails(id);
+      setUser(response.user);
       setLoading(false);
     }
 

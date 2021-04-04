@@ -4,8 +4,9 @@ import { userService } from '../../services/userService';
 
 import PageContent from '../../components/layouts/page-content.component';
 import LoadingSpinner from '../../components/loading-spinner/loading-spinner.component';
+import ModalMsg from '../../components/modal-msg/modal-msg.component';
 
-import { Box, Square, Flex, Heading, Image, Grid, GridItem, Text, HStack, Link, Button, ButtonGroup, Stack } from '@chakra-ui/react';
+import { Box, Square, Flex, Heading, Image, Grid, GridItem, Text, HStack, Link, Button, ButtonGroup, Stack, useDisclosure } from '@chakra-ui/react';
 
 import { PhoneIcon, EmailIcon, ExternalLinkIcon, EditIcon, DeleteIcon } from '@chakra-ui/icons'
 
@@ -207,21 +208,29 @@ const UserOptions = ({ id, routeChange, deleteUser }) => {
       </Button>
         </Stack>
       </ButtonGroup>
-    </Flex >
+    </Flex>
   );
 };
 
-const deleteMsg = () => {
+let timeoutIdModal;
 
-}
-
-
-const UserDetailsPage = () => {
+function UserDetailsPage() {
   const { id } = useParams();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState({});
   const history = useHistory();
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const openModal = () => {
+    onOpen();
+    clearTimeout(timeoutIdModal);
+
+    timeoutIdModal = setTimeout(() => {
+      onClose();
+    }, 2000);
+  }
 
   useEffect(() => {
     const getUser = async () => {
@@ -244,16 +253,18 @@ const UserDetailsPage = () => {
   };
 
   const deleteUser = async (id) => {
-    try {
-      const response = await userService.deleteUser(id);
-      console.log(response);
-      routeChange('/users');
-    } catch (err) {
-      console.error(err.message);
+    const response = await userService.deleteUser(id);
+
+    if (response.error) {
       setErrorMsg({
         ...errorMsg,
-        deleteError: err.message
-      })
+        deleteError: response.error
+      });
+
+      openModal();
+    } else {
+      console.log('User deleted successfully!')
+      routeChange('/users');
     }
   };
 
@@ -281,6 +292,7 @@ const UserDetailsPage = () => {
           ) :
           <Text as="h3" textAlign="center">{errorMsg.userError}</Text>
       }
+      <ModalMsg isOpen={isOpen} onClose={onClose} body={errorMsg.deleteError} />
     </PageContent>
   );
 }

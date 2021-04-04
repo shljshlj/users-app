@@ -22,13 +22,12 @@ class UserService {
       };
     } catch ({ message }) {
       console.error(message);
+
       return {
         user: null,
         error: message
       }
     }
-
-
   }
 
   async createUser(userData) {
@@ -59,15 +58,24 @@ class UserService {
   async deleteUser(id) {
     const endpoint = `${BASE_URL}/${id}`;
 
-    const res = await fetch(endpoint, {
-      method: 'DELETE'
-    });
+    try {
+      const res = await fetch(endpoint, {
+        method: 'DELETE'
+      });
+      if (!res.ok) {
+        throw new Error(`User not deleted. Status: ${res.status} (${res.statusText})`);
+      }
 
-    if (!res.ok) {
-      throw new Error(`User not deleted. Status: ${res.status} (${res.statusText})`);
+      return {
+        error: null
+      }
+    } catch ({ message }) {
+      console.error(message);
+
+      return {
+        error: message
+      }
     }
-
-    return res;
   }
 }
 
