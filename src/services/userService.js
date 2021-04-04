@@ -1,37 +1,73 @@
-const endpoint = 'http://localhost:9000/users'
+const BASE_URL = 'http://localhost:9000/users'
 
 class UserService {
   async getUsers() {
-    const res = await fetch(endpoint);
+    const res = await fetch(BASE_URL);
     const users = await res.json();
     return users;
   }
 
   async getUserDetails(id) {
-    const res = await fetch(endpoint + '/' + id);
-    const user = await res.json();
-    return user;
+    const endpoint = `${BASE_URL}/${id}`;
+
+    try {
+      const res = await fetch(endpoint);
+      if (!res.ok) {
+        throw new Error(`Cannot get user. Status: ${res.status} (${res.statusText})`)
+      }
+      const user = await res.json();
+      return {
+        user,
+        error: null
+      };
+    } catch ({ message }) {
+      console.error(message);
+      return {
+        user: null,
+        error: message
+      }
+    }
+
+
   }
 
   async createUser(userData) {
-    const res = await fetch(endpoint, {
+    const res = await fetch(BASE_URL, {
       method: 'POST',
-      body: JSON.stringify(userData),
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userData)
     });
 
     console.log(res);
   }
 
-  async editUser(id) {
+  async updateUser(id, userData) {
+    const endpoint = `${BASE_URL}/${id}`;
+    const res = await fetch(endpoint, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userData)
+    });
 
+    console.log(await res.json());
   }
 
   async deleteUser(id) {
-    const res = await fetch(endpoint + '/' + id, {
+    const endpoint = `${BASE_URL}/${id}`;
+
+    const res = await fetch(endpoint, {
       method: 'DELETE'
     });
-    console.log(res);
+
+    if (!res.ok) {
+      throw new Error(`User not deleted. Status: ${res.status} (${res.statusText})`);
+    }
+
+    return res;
   }
 }
 

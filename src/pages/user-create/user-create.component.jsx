@@ -30,8 +30,14 @@ import {
 const initialValues = {
   fullName: '',
   email: '',
+  website: '',
+  phone: '',
+  jobTitle: '',
+  street: '',
   city: '',
-  country: ''
+  state: '',
+  zip: '',
+  avatar: ''
 };
 
 const UserCreateForm = () => {
@@ -89,7 +95,7 @@ const UserCreateForm = () => {
           <FormLabel>Phone</FormLabel>
           <Input
             name="phone"
-            type="number"
+            type="text"
             placeholder="Phone number"
             value={values.phone}
             onChange={handleChange}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { userService } from '../../services/userService';
 
 import PageContent from '../../components/layouts/page-content.component';
@@ -159,7 +159,7 @@ const UserDetails = ({ user }) => {
   );
 };
 
-const UserOptions = () => {
+const UserOptions = ({ id, routeChange, deleteUser }) => {
   return (
     <Flex
       mt="4rem"
@@ -183,6 +183,7 @@ const UserOptions = () => {
             width="150px"
             colorScheme="blue"
             variant="outline"
+            onClick={() => routeChange(`/users/${id}/edit`)}
           >
             Edit User
       </Button>
@@ -192,6 +193,7 @@ const UserOptions = () => {
             width="150px"
             colorScheme="red"
             variant="outline"
+            onClick={() => deleteUser(id)}
           >
             Delete User
       </Button>
@@ -199,6 +201,7 @@ const UserOptions = () => {
             height="40px"
             width="150px"
             colorScheme="teal"
+            onClick={() => routeChange('/users/create')}
           >
             Create New User
       </Button>
@@ -208,22 +211,51 @@ const UserOptions = () => {
   );
 };
 
+const deleteMsg = () => {
+
+}
+
+
 const UserDetailsPage = () => {
   const { id } = useParams();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState({});
+  const history = useHistory();
 
   useEffect(() => {
     const getUser = async () => {
       setLoading(true);
-      const user = await userService.getUserDetails(id);
-      console.log(user);
-      setUser(user);
+      const response = await userService.getUserDetails(id);
+      console.log(response);
+
+      setErrorMsg({
+        userError: response.error
+      });
+      setUser(response.user);
       setLoading(false);
     }
 
     getUser();
   }, [id]);
+
+  const routeChange = (path) => {
+    history.push(path);
+  };
+
+  const deleteUser = async (id) => {
+    try {
+      const response = await userService.deleteUser(id);
+      console.log(response);
+      routeChange('/users');
+    } catch (err) {
+      console.error(err.message);
+      setErrorMsg({
+        ...errorMsg,
+        deleteError: err.message
+      })
+    }
+  };
 
   return (
     <PageContent>
@@ -243,11 +275,11 @@ const UserDetailsPage = () => {
               <Box
                 as="footer"
               >
-                <UserOptions />
+                <UserOptions id={user.id} routeChange={routeChange} deleteUser={deleteUser} />
               </Box>
             </Box>
           ) :
-          <Text as="h3" textAlign="center">There is no user data</Text>
+          <Text as="h3" textAlign="center">{errorMsg.userError}</Text>
       }
     </PageContent>
   );
