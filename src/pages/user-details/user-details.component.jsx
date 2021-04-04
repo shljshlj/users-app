@@ -4,7 +4,7 @@ import { userService } from '../../services/userService';
 
 import PageContent from '../../components/layouts/page-content.component';
 
-import { Box, Flex, Heading, Image, Grid, Square, StackDivider, VStack, GridItem, Text } from '@chakra-ui/react';
+import { Box, Square, Flex, Heading, Image, Grid, GridItem, Text } from '@chakra-ui/react';
 
 
 const UserHeading = ({ fullName }) => {
@@ -93,9 +93,6 @@ const UserDetailsPage = () => {
       <div>Loading...</div>
     );
   }
-
-
-
 
   return (user &&
     <PageContent>
