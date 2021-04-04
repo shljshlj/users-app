@@ -13,7 +13,8 @@ module.exports = () => {
       state: faker.address.state(),
       city: faker.address.cityName(),
       zip: faker.address.zipCode(),
-      street: faker.address.streetAddress()
+      street: faker.address.streetAddress(),
+      jobTitle: faker.name.jobTitle()
     };
     users.push(user);
   }

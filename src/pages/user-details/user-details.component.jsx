@@ -121,7 +121,7 @@ const AddressInfo = ({ street, city, state, zip }) => {
 };
 
 const UserDetails = ({ user }) => {
-  const { avatar, fullName, phone, email, website, street, city, state, zip } = user;
+  const { avatar, fullName, phone, email, website, street, city, state, zip, jobTitle } = user;
 
   return (
     <Grid
@@ -140,7 +140,7 @@ const UserDetails = ({ user }) => {
           alignItems={{ "base": "center", "md": "flex-start" }}
         >
           <UserHeading fullName={fullName} />
-          <JobTitle jobTitle="Senior Manager" />
+          <JobTitle jobTitle={jobTitle} />
         </Flex>
       </GridItem>
       <GridItem
