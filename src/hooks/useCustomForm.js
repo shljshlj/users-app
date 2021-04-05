@@ -37,10 +37,11 @@ const useCustomForm = ({ initialValues, onSubmit }) => {
   const handleSubmit = (event) => {
     if (event) event.preventDefault();
     setErrors({ ...errors });
-    onSubmit({ values, errors });
+    onSubmit(values, errors);
   }
 
   return {
+    setValues,
     values,
     errors,
     touched,

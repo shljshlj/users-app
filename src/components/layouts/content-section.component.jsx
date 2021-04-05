@@ -3,8 +3,7 @@ import { Box } from "@chakra-ui/react"
 const ContentSection = ({ children }) => {
   return (
     <Box
-    // px={4}
-    // my="2rem"
+      width="100%"
     >
       {children}
     </Box>

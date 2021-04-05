@@ -17,18 +17,7 @@ import {
   Box,
   Flex,
   Stack,
-  Heading,
   Text,
-  Divider,
-  Link,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverHeader,
-  PopoverBody,
-  PopoverArrow,
-  PopoverCloseButton,
-  useColorMode
 } from '@chakra-ui/react';
 
 const UserEditForm = ({ user }) => {

@@ -31,15 +31,33 @@ class UserService {
   }
 
   async createUser(userData) {
-    const res = await fetch(BASE_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(userData)
-    });
+    try {
+      const res = await fetch(BASE_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userData)
+      });
 
-    console.log(res);
+      if (!res.ok) {
+        throw new Error(`User not created. ${res.statusText} (${res.status})`)
+      }
+      const user = await res.json();
+
+      return {
+        error: null,
+        user
+      }
+
+    } catch ({ message }) {
+      console.error(message);
+      return {
+        error: message,
+        user: null
+      }
+    }
+
   }
 
   async updateUser(id, userData) {
