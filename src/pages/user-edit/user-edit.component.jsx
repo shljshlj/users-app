@@ -1,157 +1,148 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { userService } from '../../services/userService';
+import { useHistory, useParams } from 'react-router-dom';
 
-import useCustomForm from '../../hooks/useCustomForm';
+import { userService } from '../../services/userService';
 
 import PageContent from '../../components/layouts/page-content.component';
 import ContentSection from '../../components/layouts/content-section.component';
 import PageHeading from '../../components/page-heading/page-heading.component';
 
+import { fields } from '../../utils/data';
+
 import {
-  FormControl,
-  FormLabel,
-  Input,
-  FormErrorMessage,
   Button,
   Box,
   Flex,
   Stack,
   Text,
+  ButtonGroup,
+  VStack,
 } from '@chakra-ui/react';
+import FormField from '../../components/form/form-field.component';
+import useCustomForm from '../../hooks/useCustomForm';
 
-const UserEditForm = ({ user }) => {
+const validateName = (value) => {
+  let error;
+  const lettersRegExp = /^[A-Za-z ]+$/;
+  if (!value) {
+    error = 'Full name is required';
+  } else if (!lettersRegExp.test(value)) {
+    error = 'Please input alphabet characters only';
+  }
+  return error;
+};
+
+const validateEmail = (value) => {
+  let error;
+  const emailRegExp = /^.+@.+\..+$/;
+  if (!value) {
+    error = 'Email is required';
+  } else if (!emailRegExp.test(value)) {
+    error = 'Email has to contain "@". After "@" there should be some characters and "." and some more characters';
+  }
+  return error;
+};
+
+
+const UserEditForm = ({ userId, user, routeChange }) => {
   const initialValues = { ...user };
 
+  const handleUpdateUser = async (values) => {
+    const response = await userService.updateUser(userId, values);
+    if (response.error) {
+      console.log(response.error);
+    }
+
+    console.log('Success! User updated');
+
+    const { id } = response.user;
+    routeChange(`/users/${id}`);
+  }
+
   const {
+    setValues,
     values,
     errors,
-    touched,
     handleChange,
-    handleBlur,
     handleSubmit
   } = useCustomForm({
     initialValues,
-    onSubmit: (values) => console.log(values)
+    onSubmit: handleUpdateUser
   });
 
   return (
     <form onSubmit={handleSubmit}>
-      <Stack spacing={6} alignItems="stretch">
-        <FormControl id="fullName" isRequired>
-          <FormLabel>Full Name</FormLabel>
-          <Input
-            required
-            name="fullName"
-            type="text"
-            placeholder="Full Name"
-            value={values.fullName}
-            onChange={handleChange}
-          />
-        </FormControl>
+      <Flex direction="column" alignItems="stretch">
+        <Box p={4} mb={5} borderRadius="lg" borderWidth="1px">
+          <Text color="teal.500" mb="2rem">
+            Required Fields
+        </Text>
+          <VStack spacing={4}>
+            <FormField {...fields.fullName} value={values.fullName} handleChange={handleChange} />
+            <FormField {...fields.email} value={values.email} handleChange={handleChange} />
+          </VStack>
+        </Box>
 
-        <FormControl id="email" isRequired>
-          <FormLabel>Email</FormLabel>
-          <Input
-            required
-            name="email"
-            type="email"
-            placeholder="Email address"
-            value={values.email}
-            onChange={handleChange}
-          />
-        </FormControl>
+        <Box p={4} mb={5}>
+          <VStack spacing={4}>
+            <FormField {...fields.avatar} value={values.avatar} handleChange={handleChange} />
+            <FormField {...fields.jobTitle} value={values.jobTitle} handleChange={handleChange} />
+          </VStack>
+        </Box>
 
-        <FormControl id="website">
-          <FormLabel>Website</FormLabel>
-          <Input
-            name="website"
-            type="url"
-            placeholder="Personal website"
-            value={values.website}
-            onChange={handleChange}
-          />
-        </FormControl>
+        <Box p={4} mb={5}>
+          <VStack spacing={4}>
+            <FormField {...fields.website} value={values.website} handleChange={handleChange} />
+            <FormField {...fields.phone} value={values.phone} handleChange={handleChange} />
+          </VStack>
+        </Box>
 
-        <FormControl id="phone">
-          <FormLabel>Phone</FormLabel>
-          <Input
-            name="phone"
-            type="text"
-            placeholder="Phone number"
-            value={values.phone}
-            onChange={handleChange}
-          />
-        </FormControl>
-
-        <FormControl id="jobTitle">
-          <FormLabel>Job Title</FormLabel>
-          <Input
-            name="jobTitle"
-            type="text"
-            placeholder="Job title"
-            value={values.jobTitle}
-            onChange={handleChange}
-          />
-        </FormControl>
-
-        <FormControl id="street">
-          <FormLabel>Street</FormLabel>
-          <Input
-            name="street"
-            type="text"
-            placeholder="Street"
-            value={values.street}
-            onChange={handleChange}
-          />
-        </FormControl>
-
-        <FormControl id="city">
-          <FormLabel>City</FormLabel>
-          <Input
-            name="city"
-            type="text"
-            placeholder="City"
-            value={values.city}
-            onChange={handleChange}
-          />
-        </FormControl>
-
-        <FormControl id="state">
-          <FormLabel>State</FormLabel>
-          <Input
-            name="state"
-            type="text"
-            placeholder="State"
-            value={values.state}
-            onChange={handleChange}
-          />
-        </FormControl>
-
-        <FormControl id="zip">
-          <FormLabel>ZIP Code</FormLabel>
-          <Input
-            name="zip"
-            type="text"
-            placeholder="ZIP code"
-            value={values.zip}
-            onChange={handleChange}
-          />
-        </FormControl>
-
-        <FormControl id="avatar">
-          <FormLabel>Picture URL</FormLabel>
-          <Input
-            name="avatar"
-            type="getUserDetails"
-            placeholder="Picture URL"
-            value={values.avatar}
-            onChange={handleChange}
-          />
-        </FormControl>
-      </Stack>
+        <Box p={4} mb={5} borderRadius="lg" borderWidth="1px">
+          <Text color="teal.500" mb="2rem">
+            Address
+        </Text>
+          <VStack spacing={4}>
+            <FormField {...fields.street} value={values.street} handleChange={handleChange} />
+            <FormField {...fields.city} value={values.city} handleChange={handleChange} />
+            <FormField {...fields.state} value={values.state} handleChange={handleChange} />
+            <FormField {...fields.zip} value={values.zip} handleChange={handleChange} />
+          </VStack>
+        </Box>
+      </Flex>
+      <Flex
+        justifyContent={{ "base": "center", "md": "flex-end" }}
+        p={4}
+      >
+        <ButtonGroup
+          size="sm"
+        >
+          <Stack
+            direction={{ "base": "row" }}
+            py={2}
+            spacing={6}
+          >
+            <Button
+              height="40px"
+              width="150px"
+              colorScheme="blue"
+              variant="outline"
+              onClick={() => routeChange('/users')}
+            >
+              Cancel
+            </Button>
+            <Button
+              height="40px"
+              width="150px"
+              colorScheme="teal"
+              type="submit"
+            >
+              Submit
+      </Button>
+          </Stack>
+        </ButtonGroup>
+      </Flex>
     </form>
-  );
+  )
 };
 
 const UserName = ({ fullName }) => {
@@ -169,6 +160,12 @@ const UserEditPage = () => {
   const { id } = useParams();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const history = useHistory();
+
+  const routeChange = (path) => {
+    history.push(path);
+  };
 
   useEffect(() => {
     const getUser = async () => {
@@ -191,7 +188,7 @@ const UserEditPage = () => {
           loading ?
             <div>Loading...</div> :
             user ?
-              <UserEditForm user={user} /> :
+              <UserEditForm userId={id} user={user} routeChange={routeChange} /> :
               <div>User data is not available</div>
         }
       </ContentSection>

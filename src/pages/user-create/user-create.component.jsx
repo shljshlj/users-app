@@ -38,9 +38,7 @@ const UserCreateForm = ({ routeChange }) => {
     setValues,
     values,
     errors,
-    touched,
     handleChange,
-    handleBlur,
     handleSubmit
   } = useCustomForm({
     initialValues,
@@ -124,7 +122,7 @@ const UserCreateForm = ({ routeChange }) => {
               colorScheme="teal"
               type="submit"
             >
-              Create New User
+              Submit
       </Button>
           </Stack>
         </ButtonGroup>

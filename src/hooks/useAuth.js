@@ -4,7 +4,6 @@ const useAuth = () => {
   const getItemFromStorage = (item, typeOfStorage) => {
     const itemString = typeOfStorage.getItem(item);
     const itemValue = JSON.parse(itemString);
-    console.log(itemValue);
 
     return itemValue;
   };

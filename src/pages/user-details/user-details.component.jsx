@@ -236,7 +236,6 @@ function UserDetailsPage() {
     const getUser = async () => {
       setLoading(true);
       const response = await userService.getUserDetails(id);
-      console.log(response);
 
       setErrorMsg({
         userError: response.error
