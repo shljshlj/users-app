@@ -5,6 +5,8 @@ import { userService } from '../../services/userService';
 import LoadingSpinner from '../loading-spinner/loading-spinner.component';
 import UserItem from './user-item.component';
 
+import './user-list.styles.css';
+
 import {
   Box,
   Table,
@@ -34,6 +36,7 @@ const UserList = () => {
 
   return (
     <Box
+      className="table-responsive"
       my="2rem"
     >
       <Table variant="simple" size="md">
