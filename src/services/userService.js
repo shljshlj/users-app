@@ -13,7 +13,7 @@ class UserService {
     try {
       const res = await fetch(endpoint);
       if (!res.ok) {
-        throw new Error(`Cannot get user. Status: ${res.status} (${res.statusText})`)
+        throw new Error(`Cannot get user. Status: ${res.statusText} (${res.status})`)
       }
       const user = await res.json();
       return {

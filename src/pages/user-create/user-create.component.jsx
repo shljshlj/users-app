@@ -31,7 +31,7 @@ const UserCreateForm = ({ routeChange }) => {
     console.log('Success! User created');
 
     const { id } = response.user;
-    routeChange(`/users/${id}`);
+    routeChange(`/users`);
   }
 
   const {
