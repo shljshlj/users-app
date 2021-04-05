@@ -22,7 +22,7 @@ import {
 
 
 const UserCreateForm = ({ routeChange }) => {
-  const handleCreateUser = async (values, errors) => {
+  const handleCreateUser = async (values) => {
     const response = await userService.createUser(values);
     if (response.error) {
       console.log(response.error);

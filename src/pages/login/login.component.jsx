@@ -37,7 +37,7 @@ const LoginPage = ({
   const loginUser = (loginData) => {
     try {
       if (authToken) {
-        if (loginData.values.email !== authToken) {
+        if (loginData.email !== authToken) {
           console.log(loginData)
           throw new Error("Email is not matching");
         }
@@ -45,7 +45,7 @@ const LoginPage = ({
           setHasLogged();
         }
       } else {
-        setAuthToken(loginData.values.email);
+        setAuthToken(loginData.email);
         setHasLogged();
       }
     }
