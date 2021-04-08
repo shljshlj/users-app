@@ -39,7 +39,6 @@ export const fields = {
     name: 'firstName',
     type: 'text',
     placeholder: 'First name',
-    isFlex: true,
     isFieldRequired: true
   },
   lastName: {
@@ -48,7 +47,6 @@ export const fields = {
     name: 'lastName',
     type: 'text',
     placeholder: 'Last name',
-    isFlex: true,
     isFieldRequired: true
   },
   email: {
@@ -57,7 +55,6 @@ export const fields = {
     name: 'email',
     type: 'email',
     placeholder: 'Email address',
-    isFlex: true,
     isFieldRequired: true
   },
   avatar: {
@@ -66,7 +63,6 @@ export const fields = {
     name: 'avatar',
     type: 'text',
     placeholder: 'Picture URL',
-    isFlex: false,
     isFieldRequired: false
   },
   jobTitle: {
@@ -75,7 +71,6 @@ export const fields = {
     name: 'jobTitle',
     type: 'text',
     placeholder: 'Job title',
-    isFlex: false,
     isFieldRequired: false
   },
   website: {
@@ -84,7 +79,6 @@ export const fields = {
     name: 'website',
     type: 'text',
     placeholder: 'Personal website',
-    isFlex: true,
     isFieldRequired: false
   },
   phone: {
@@ -93,7 +87,6 @@ export const fields = {
     name: 'phone',
     type: 'text',
     placeholder: 'Phone number',
-    isFlex: true,
     isFieldRequired: false
   },
   street: {
@@ -102,7 +95,6 @@ export const fields = {
     name: 'street',
     type: 'text',
     placeholder: 'Street',
-    isFlex: false,
     isFieldRequired: false
   },
   city: {
@@ -111,7 +103,6 @@ export const fields = {
     name: 'city',
     type: 'text',
     placeholder: 'City',
-    isFlex: true,
     isFieldRequired: false
   },
   state: {
@@ -120,7 +111,6 @@ export const fields = {
     name: 'state',
     type: 'text',
     placeholder: 'State',
-    isFlex: true,
     isFieldRequired: false
   },
   zip: {
@@ -129,7 +119,6 @@ export const fields = {
     name: 'zip',
     type: 'text',
     placeholder: 'ZIP code',
-    isFlex: true,
     isFieldRequired: false
   }
 };

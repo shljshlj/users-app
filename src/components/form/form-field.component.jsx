@@ -2,6 +2,7 @@ import { RepeatIcon } from '@chakra-ui/icons';
 import {
   Flex,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   IconButton,
   Input,
@@ -16,9 +17,11 @@ function FormField({
   value,
   placeholder,
   handleChange,
-  isFlex = false,
   isFieldRequired = false,
-  generate = null
+  errors = null,
+  touched = false,
+  generate = false,
+  isFlex = false
 }) {
   const optionsControl = isFlex && {
     display: { "md": "flex" },
@@ -38,7 +41,9 @@ function FormField({
     <FormControl
       {...optionsControl}
       id={id}
-      isRequired={isFieldRequired}>
+      isRequired={isFieldRequired}
+      isInvalid={errors && errors.name && touched.name}
+    >
       <FormLabel {...optionsLabel}>{label}</FormLabel>
       <Flex
         {...optionsInput}
@@ -51,22 +56,23 @@ function FormField({
           value={value}
           onChange={handleChange}
         />
-        {
-          generate && (
-            <Tooltip label="Generate random" placement="top-end" openDelay={500}>
-              <IconButton
-                ml="0.5rem"
-                colorScheme="teal"
-                variant="link"
-                aria-label={`Generate random ${name}`}
-                size="sm"
-                icon={<RepeatIcon />}
-                onClick={() => generate(name)}
-              />
-            </Tooltip>
-          )
-        }
+        {generate && (
+          <Tooltip label="Generate random" placement="top-end" openDelay={500}>
+            <IconButton
+              ml="0.5rem"
+              colorScheme="teal"
+              variant="link"
+              aria-label={`Generate random ${name}`}
+              size="sm"
+              icon={<RepeatIcon />}
+              onClick={() => generate(name)}
+            />
+          </Tooltip>
+        )}
       </Flex>
+      {errors && (
+        <FormErrorMessage>{errors.name}</FormErrorMessage>
+      )}
     </FormControl>
   );
 };
