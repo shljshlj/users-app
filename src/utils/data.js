@@ -2,7 +2,8 @@ import faker from 'faker';
 
 export const generateRandomData = (type) => {
   const data = {
-    fullName: faker.name.findName(),
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
     email: faker.internet.email().toLowerCase(),
     avatar: faker.internet.avatar(),
     jobTitle: faker.name.jobTitle(),
@@ -18,7 +19,8 @@ export const generateRandomData = (type) => {
 };
 
 export const initialValues = {
-  fullName: '',
+  firstName: '',
+  lastName: '',
   email: '',
   avatar: '',
   jobTitle: '',
@@ -31,12 +33,21 @@ export const initialValues = {
 };
 
 export const fields = {
-  fullName: {
-    id: 'fullName',
-    label: 'Full Name',
-    name: 'fullName',
+  firstName: {
+    id: 'firstName',
+    label: 'First Name',
+    name: 'firstName',
     type: 'text',
-    placeholder: 'Full name',
+    placeholder: 'First name',
+    isFlex: true,
+    isFieldRequired: true
+  },
+  lastName: {
+    id: 'lastName',
+    label: 'Last Name',
+    name: 'lastName',
+    type: 'text',
+    placeholder: 'Last name',
     isFlex: true,
     isFieldRequired: true
   },

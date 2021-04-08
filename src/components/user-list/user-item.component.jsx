@@ -31,7 +31,7 @@ const UserItem = ({ user }) => {
       </Td>
       <Td data-title="Full Name">
         <Link as={RouterLink} to={`/users/${user.id}`}>
-          {user.fullName}
+          {`${user.firstName} ${user.lastName}`}
         </Link>
       </Td>
       <Td data-title="City">{user.city}</Td>

@@ -8,10 +8,12 @@ const useCustomForm = ({ initialValues, onSubmit }) => {
 
   useEffect(() => {
     if (formRendered.current) {
+      console.log(formRendered.current)
       setValues(initialValues);
       setErrors({});
     }
     formRendered.current = false;
+    console.log(formRendered.current)
   }, [initialValues]);
 
   const handleChange = (event) => {

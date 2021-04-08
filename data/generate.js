@@ -2,10 +2,11 @@ module.exports = () => {
   const faker = require('faker');
   const users = [];
 
-  for (let i = 1; i < 45; i++) {
+  for (let i = 1; i <= 20; i++) {
     const user = {
       id: i,
-      fullName: faker.name.findName(),
+      firstName: faker.name.firstName(),
+      lastName: faker.name.lastName(),
       avatar: faker.internet.avatar(),
       email: faker.internet.email().toLowerCase(),
       website: 'www.' + faker.internet.domainName(),

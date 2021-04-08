@@ -26,12 +26,12 @@ const UserCreateForm = ({ routeChange }) => {
     const response = await userService.createUser(values);
     if (response.error) {
       console.log(response.error);
+    } else {
+      console.log('Success! User created');
+
+      const { id } = response.user;
+      routeChange(`/users/${id}`);
     }
-
-    console.log('Success! User created');
-
-    const { id } = response.user;
-    routeChange(`/users/${id}`);
   }
 
   const {
@@ -55,6 +55,7 @@ const UserCreateForm = ({ routeChange }) => {
     setValues({ ...initialValues });
   }
 
+  const canGenerate = false;
 
   return (
     <form onSubmit={handleSubmit}>
@@ -64,7 +65,8 @@ const UserCreateForm = ({ routeChange }) => {
             Required Fields
         </Text>
           <VStack spacing={4}>
-            <FormField {...fields.fullName} value={values.fullName} handleChange={handleChange} generate={generateFieldData} />
+            <FormField {...fields.firstName} value={values.firstName} handleChange={handleChange} generate={canGenerate && generateFieldData} />
+            <FormField {...fields.lastName} value={values.lastName} handleChange={handleChange} generate={generateFieldData} />
             <FormField {...fields.email} value={values.email} handleChange={handleChange} generate={generateFieldData} />
           </VStack>
         </Box>

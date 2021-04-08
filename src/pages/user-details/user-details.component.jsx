@@ -122,7 +122,8 @@ const AddressInfo = ({ street, city, state, zip }) => {
 };
 
 const UserDetails = ({ user }) => {
-  const { avatar, fullName, phone, email, website, street, city, state, zip, jobTitle } = user;
+  const { avatar, firstName, lastName, phone, email, website, street, city, state, zip, jobTitle } = user;
+  const fullName = firstName + ' ' + lastName;
 
   return (
     <Grid

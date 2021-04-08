@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
 import { userService } from '../../services/userService';
+import { validationService } from '../../services/validationService';
 
 import PageContent from '../../components/layouts/page-content.component';
 import ContentSection from '../../components/layouts/content-section.component';
 import PageHeading from '../../components/page-heading/page-heading.component';
 
-import { fields } from '../../utils/data';
+import { fields, initialValues } from '../../utils/data';
 
 import {
   Button,
@@ -21,41 +22,24 @@ import {
 import FormField from '../../components/form/form-field.component';
 import useCustomForm from '../../hooks/useCustomForm';
 
-const validateName = (value) => {
-  let error;
-  const lettersRegExp = /^[A-Za-z ]+$/;
-  if (!value) {
-    error = 'Full name is required';
-  } else if (!lettersRegExp.test(value)) {
-    error = 'Please input alphabet characters only';
-  }
-  return error;
+const validate = {
+  firstName: name => validationService.nameValidation('First Name', name),
+  lastName: name => validationService.nameValidation('Last Name', name),
+  email: validationService.emailValidation
 };
 
-const validateEmail = (value) => {
-  let error;
-  const emailRegExp = /^.+@.+\..+$/;
-  if (!value) {
-    error = 'Email is required';
-  } else if (!emailRegExp.test(value)) {
-    error = 'Email has to contain "@". After "@" there should be some characters and "." and some more characters';
-  }
-  return error;
-};
+// const UserEditForm = ({ initialValues, validate })
 
-
-const UserEditForm = ({ userId, user, routeChange }) => {
-  const initialValues = { ...user };
+const UserEditForm = ({ user, validate, routeChange }) => {
+  const { id, ...initialValues } = user;
 
   const handleUpdateUser = async (values) => {
-    const response = await userService.updateUser(userId, values);
+    const response = await userService.updateUser(id, values);
     if (response.error) {
       console.log(response.error);
     }
 
     console.log('Success! User updated');
-
-    const { id } = response.user;
     routeChange(`/users/${id}`);
   }
 
@@ -78,7 +62,8 @@ const UserEditForm = ({ userId, user, routeChange }) => {
             Required Fields
         </Text>
           <VStack spacing={4}>
-            <FormField {...fields.fullName} value={values.fullName} handleChange={handleChange} />
+            <FormField {...fields.firstName} value={values.firstName} handleChange={handleChange} />
+            <FormField {...fields.lastName} value={values.lastName} handleChange={handleChange} />
             <FormField {...fields.email} value={values.email} handleChange={handleChange} />
           </VStack>
         </Box>
@@ -171,6 +156,7 @@ const UserEditPage = () => {
     const getUser = async () => {
       setLoading(true);
       const response = await userService.getUserDetails(id);
+      console.log(response.user);
       setUser(response.user);
       setLoading(false);
     }
@@ -188,7 +174,7 @@ const UserEditPage = () => {
           loading ?
             <div>Loading...</div> :
             user ?
-              <UserEditForm userId={id} user={user} routeChange={routeChange} /> :
+              <UserEditForm user={user} validate={validate} routeChange={routeChange} /> :
               <div>User data is not available</div>
         }
       </ContentSection>
@@ -198,3 +184,5 @@ const UserEditPage = () => {
 }
 
 export default UserEditPage;
+
+/* <UserEditForm userId={id} user={user} routeChange={routeChange} /> : */
