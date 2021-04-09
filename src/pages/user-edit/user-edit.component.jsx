@@ -22,7 +22,7 @@ const validate = {
 };
 
 
-const UserEditForm = ({ user, validate, routeChange }) => {
+const UserEditForm = ({ user, routeChange }) => {
   const { id, ...initialValues } = user;
 
   const handleUpdateUser = async (values) => {
@@ -45,6 +45,7 @@ const UserEditForm = ({ user, validate, routeChange }) => {
     handleSubmit
   } = useCustomForm({
     initialValues,
+    validate,
     onSubmit: handleUpdateUser
   });
 
@@ -108,7 +109,7 @@ const UserEditPage = () => {
           loading ?
             <div>Loading...</div> :
             user ?
-              <UserEditForm user={user} validate={validate} routeChange={routeChange} /> :
+              <UserEditForm user={user} routeChange={routeChange} /> :
               <div>User data is not available</div>
         }
       </ContentSection>

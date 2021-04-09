@@ -2,6 +2,7 @@ import { useHistory } from 'react-router-dom';
 import useCustomForm from '../../hooks/useCustomForm';
 
 import { userService } from '../../services/userService';
+import { validationService } from '../../services/validationService';
 
 import PageContent from '../../components/layouts/page-content.component';
 import ContentSection from '../../components/layouts/content-section.component';
@@ -10,9 +11,17 @@ import UserForm from '../../components/form/userForm.component';
 
 import { initialValues } from '../../utils/data';
 
+const validate = {
+  firstName: name => validationService.nameValidation('First Name', name),
+  lastName: name => validationService.nameValidation('Last Name', name),
+  email: validationService.emailValidation
+};
 
 const UserCreateForm = ({ routeChange }) => {
-  const handleCreateUser = async (values) => {
+  const handleCreateUser = async (values, errors) => {
+    console.log(values)
+    console.log(errors)
+
     const response = await userService.createUser(values);
     if (response.error) {
       console.log(response.error);
@@ -34,6 +43,7 @@ const UserCreateForm = ({ routeChange }) => {
     handleSubmit
   } = useCustomForm({
     initialValues,
+    validate,
     onSubmit: handleCreateUser
   });
 

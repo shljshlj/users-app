@@ -1,9 +1,11 @@
 import { RepeatIcon } from '@chakra-ui/icons';
 import {
+  Box,
   Flex,
   FormControl,
   FormErrorMessage,
   FormLabel,
+  GridItem,
   IconButton,
   Input,
   Tooltip
@@ -16,33 +18,44 @@ function FormField({
   type,
   value,
   placeholder,
-  handleChange,
-  isFieldRequired = false,
+  onChange,
+  onBlur = null,
   errors = null,
   touched = false,
+  isFieldRequired = false,
   generate = false,
   isFlex = false
 }) {
-  const optionsControl = isFlex && {
+  const gridStyle = isFieldRequired && {
+    display: { "md": "grid" },
+    gridTemplateColumns: "3fr 7fr",
+    gridTemplateRows: "repeat(2, 1fr)"
+  }
+
+  const flexStyle = isFlex && !isFieldRequired && {
     display: { "md": "flex" },
     alignItems: { "md": "center" },
-    justifyContent: { "md": "space-between" }
+    justifyContent: { "md": "space-between" },
+    flexWrap: { "md": "wrap" }
   };
 
-  const optionsLabel = isFlex && {
+  const optionsLabel = isFlex && !isFieldRequired && {
     flexShrink: { "md": "0" }
   };
 
-  const optionsInput = isFlex && {
+  const optionsInput = isFlex && !isFieldRequired && {
     width: { "base": "100%", "md": "70%" }
   };
 
+  console.log(`form field ${name} errors:`, errors);
+
   return (
     <FormControl
-      {...optionsControl}
+      {...gridStyle}
+      {...flexStyle}
       id={id}
       isRequired={isFieldRequired}
-      isInvalid={errors && errors.name && touched.name}
+      isInvalid={errors && errors[name] && touched[name]}
     >
       <FormLabel {...optionsLabel}>{label}</FormLabel>
       <Flex
@@ -54,7 +67,8 @@ function FormField({
           type={type}
           placeholder={placeholder}
           value={value}
-          onChange={handleChange}
+          onChange={onChange}
+          onBlur={onBlur}
         />
         {generate && (
           <Tooltip label="Generate random" placement="top-end" openDelay={500}>
@@ -71,7 +85,9 @@ function FormField({
         )}
       </Flex>
       {errors && (
-        <FormErrorMessage>{errors.name}</FormErrorMessage>
+        <GridItem colStart={2}>
+          <FormErrorMessage flexBasis="100%">{errors[name]}</FormErrorMessage>
+        </GridItem>
       )}
     </FormControl>
   );

@@ -39,11 +39,12 @@ const UserForm = ({
           <Text color="teal.500" mb="2rem">
             Required Fields
           </Text>
-          <VStack spacing={4}>
+          <VStack spacing={1}>
             <FormField
               {...fields.firstName}
               value={values.firstName}
-              handleChange={handleChange}
+              onChange={handleChange}
+              onBlur={handleBlur}
               errors={errors}
               touched={touched}
               generate={canGenerate && generateFieldData}
@@ -52,7 +53,8 @@ const UserForm = ({
             <FormField
               {...fields.lastName}
               value={values.lastName}
-              handleChange={handleChange}
+              onChange={handleChange}
+              onBlur={handleBlur}
               errors={errors}
               touched={touched}
               generate={canGenerate && generateFieldData}
@@ -61,7 +63,8 @@ const UserForm = ({
             <FormField
               {...fields.email}
               value={values.email}
-              handleChange={handleChange}
+              onChange={handleChange}
+              onBlur={handleBlur}
               errors={errors}
               touched={touched}
               generate={canGenerate && generateFieldData}
@@ -75,13 +78,13 @@ const UserForm = ({
             <FormField
               {...fields.avatar}
               value={values.avatar}
-              handleChange={handleChange}
+              onChange={handleChange}
               generate={canGenerate && generateFieldData}
             />
             <FormField
               {...fields.jobTitle}
               value={values.jobTitle}
-              handleChange={handleChange}
+              onChange={handleChange}
               generate={canGenerate && generateFieldData}
             />
           </VStack>
@@ -92,14 +95,14 @@ const UserForm = ({
             <FormField
               {...fields.website}
               value={values.website}
-              handleChange={handleChange}
+              onChange={handleChange}
               generate={canGenerate && generateFieldData}
               isFlex={true}
             />
             <FormField
               {...fields.phone}
               value={values.phone}
-              handleChange={handleChange}
+              onChange={handleChange}
               generate={canGenerate && generateFieldData}
               isFlex={true}
             />
@@ -113,24 +116,24 @@ const UserForm = ({
           <VStack spacing={4}>
             <FormField {...fields.street}
               value={values.street}
-              handleChange={handleChange}
+              onChange={handleChange}
               generate={canGenerate && generateFieldData}
             />
             <FormField {...fields.city}
               value={values.city}
-              handleChange={handleChange}
+              onChange={handleChange}
               generate={canGenerate && generateFieldData}
               isFlex={true}
             />
             <FormField {...fields.state}
               value={values.state}
-              handleChange={handleChange}
+              onChange={handleChange}
               generate={canGenerate && generateFieldData}
               isFlex={true}
             />
             <FormField {...fields.zip}
               value={values.zip}
-              handleChange={handleChange}
+              onChange={handleChange}
               generate={canGenerate && generateFieldData}
               isFlex={true}
             />
